@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class dialog extends StatefulWidget {
-  const dialog({Key? key}) : super(key: key);
+class PopupDialog extends StatefulWidget {
+  const PopupDialog({Key? key}) : super(key: key);
 
   @override
-  _dialogState createState() => _dialogState();
+  _PopupDialogState createState() => _PopupDialogState();
 }
 
-class _dialogState extends State<dialog> {
+class _PopupDialogState extends State<PopupDialog> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +18,7 @@ class _dialogState extends State<dialog> {
             child: Divider(
               height: 2,
               thickness: 2,
-              color: Colors.red,
+              color: Colors.blue,
             ),
           ),
           ListTile(
@@ -66,11 +66,11 @@ class _dialogState extends State<dialog> {
           SizedBox(
             height: 20,
           ),
-          // ignore: deprecated_member_use
-          RaisedButton(
+          TextButton(
             child: Text("Submit"),
             onPressed: () {},
-            color: Colors.blue,
+            // color: Colors.lightBlue,
+            // textColor: Colors.white,
           )
         ],
       ),
