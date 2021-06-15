@@ -19,9 +19,9 @@ class ViewGroupsPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
         onPressed: () {
-          _showInformationDialog(context);
+          _createNewGroup(context);
         },
-        label: Text("Add New Group"),
+        label: Text("Create Group"),
       ),
       body: myGroups.isEmpty
           ? Center(
@@ -32,25 +32,28 @@ class ViewGroupsPage extends StatelessWidget {
               itemCount: myGroups.length,
               itemBuilder: (BuildContext ctx, int index) {
                 return Card(
-                  shadowColor: Colors.black,
+                  margin: EdgeInsets.fromLTRB(12, 12, 12, 0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
-                  elevation: 3,
-                  child: Column(
-                    children: <ListTile>[
-                      ListTile(
-                        title: Text(myGroups[index].groupName),
-                        subtitle: Text(
-                            'Department:' + myGroups[index].departmentName),
-                      )
-                    ],
+                  elevation: 8,
+                  child: InkWell(
+                    onTap: () {},
+                    child: Column(
+                      children: <ListTile>[
+                        ListTile(
+                          title: Text(myGroups[index].groupName),
+                          subtitle: Text(
+                              'Department:' + myGroups[index].departmentName),
+                        )
+                      ],
+                    ),
                   ),
                 );
               }),
     );
   }
 
-  _showInformationDialog(BuildContext context) {
+  _createNewGroup(BuildContext context) {
     return showDialog(
       context: context,
       builder: (context) {
