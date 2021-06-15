@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 
-import '../models/members.dart';
+import '../models/member.dart';
 
 class Members with ChangeNotifier {
-  static List<Member> memberItems = [
-    Member(memberDetails: 'xyz', seniorityLevel: 'yzy'),
-    Member(memberDetails: 'xyz', seniorityLevel: 'yzy')
+  static List<Member> members = [
+    Member(
+      name: 'Amit Sen',
+      seniorityLevel: 'Senior',
+    ),
+    Member(
+      name: 'Rabindranath Roy',
+      seniorityLevel: 'Junior',
+    ),
+    Member(
+      name: 'Sylvia Sharma',
+      seniorityLevel: 'Trainee',
+    ),
   ];
 
   void addMember(value) {
-    memberItems.add(value);
+    members.add(value);
     notifyListeners();
   }
 }

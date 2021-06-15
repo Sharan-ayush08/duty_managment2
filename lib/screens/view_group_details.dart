@@ -1,4 +1,4 @@
-import 'package:duty_managment2/models/members.dart';
+import 'package:duty_managment2/models/member.dart';
 import 'package:duty_managment2/providers/group_members.dart';
 import 'package:flutter/material.dart';
 
@@ -7,18 +7,18 @@ class ViewGroupDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Member> myMembers = Members.memberItems;
+    List<Member> groupMembers = Members.members;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text("Member Details"),
+        title: Text("Group Details"),
       ),
-      body: myMembers.isEmpty
+      body: groupMembers.isEmpty
           ? Center(
               child: Text('No Members'),
             )
           : ListView.builder(
-              itemCount: myMembers.length,
+              itemCount: groupMembers.length,
               itemBuilder: (BuildContext ctx, int index) {
                 return Card(
                   margin: EdgeInsets.fromLTRB(12, 12, 12, 0),
@@ -31,9 +31,12 @@ class ViewGroupDetails extends StatelessWidget {
                     child: Column(
                       children: <ListTile>[
                         ListTile(
-                          title: Text(myMembers[index].memberDetails),
-                          subtitle: Text('Seniority Level:' +
-                              myMembers[index].seniorityLevel),
+                          leading: CircleAvatar(
+                            radius: 30,
+                          ),
+                          title: Text(groupMembers[index].name),
+                          subtitle: Text(
+                              'Level: ' + groupMembers[index].seniorityLevel),
                           trailing: PopupMenuButton(
                             offset: Offset(0, -35),
                             itemBuilder: (context) => [
