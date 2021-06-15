@@ -1,3 +1,4 @@
+import 'package:duty_managment2/screens/view_group_details.dart';
 import 'package:duty_managment2/screens/view_groups.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewGroupsPage();
+    return ViewGroupDetails();
   }
 }

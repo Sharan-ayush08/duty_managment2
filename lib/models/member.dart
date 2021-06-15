@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 
 class Member with ChangeNotifier {
-  String memberDetails;
+  String name;
+  String? profilePhoto;
   String seniorityLevel;
 
   Member({
-    this.memberDetails = 'My Member',
+    this.name = 'My Member',
     this.seniorityLevel = '',
   });
 }
