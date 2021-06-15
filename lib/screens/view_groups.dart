@@ -16,11 +16,12 @@ class ViewGroupsPage extends StatelessWidget {
         backgroundColor: Colors.blue,
         title: Text("Groups"),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.add),
         onPressed: () {
           _showInformationDialog(context);
         },
-        child: Icon(Icons.add),
+        label: Text("Add New Group"),
       ),
       body: myGroups.isEmpty
           ? Center(
@@ -30,14 +31,20 @@ class ViewGroupsPage extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemCount: myGroups.length,
               itemBuilder: (BuildContext ctx, int index) {
-                return Column(
-                  children: <ListTile>[
-                    ListTile(
-                      title: Text(myGroups[index].groupName),
-                      subtitle:
-                          Text('Department:' + myGroups[index].departmentName),
-                    )
-                  ],
+                return Card(
+                  shadowColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  elevation: 3,
+                  child: Column(
+                    children: <ListTile>[
+                      ListTile(
+                        title: Text(myGroups[index].groupName),
+                        subtitle: Text(
+                            'Department:' + myGroups[index].departmentName),
+                      )
+                    ],
+                  ),
                 );
               }),
     );
