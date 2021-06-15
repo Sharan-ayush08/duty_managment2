@@ -44,6 +44,24 @@ class ViewGroupsPage extends StatelessWidget {
                           title: Text(myGroups[index].groupName),
                           subtitle: Text(
                               'Department:' + myGroups[index].departmentName),
+                          trailing: PopupMenuButton(
+                            offset: Offset(0, -35),
+                            itemBuilder: (context) => [
+                              PopupMenuItem(
+                                value: 'edit',
+                                child: Text(
+                                  'Edit',
+                                ),
+                              ),
+                              PopupMenuItem(
+                                value: 'Delete',
+                                child: Text(
+                                  'Delete',
+                                ),
+                              ),
+                            ],
+                            onSelected: (value) {},
+                          ),
                         )
                       ],
                     ),
