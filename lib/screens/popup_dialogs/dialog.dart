@@ -8,6 +8,8 @@ class PopupDialog extends StatefulWidget {
 }
 
 class _PopupDialogState extends State<PopupDialog> {
+  TextEditingController groupName = TextEditingController();
+  TextEditingController department = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,6 +32,7 @@ class _PopupDialogState extends State<PopupDialog> {
               ),
             ),
             title: TextFormField(
+              controller: groupName,
               decoration: InputDecoration(
                 labelText: "Group Name",
               ),
@@ -58,6 +61,7 @@ class _PopupDialogState extends State<PopupDialog> {
               ),
             ),
             title: TextFormField(
+              controller: department,
               decoration: InputDecoration(
                 labelText: "Department",
               ),
@@ -68,7 +72,11 @@ class _PopupDialogState extends State<PopupDialog> {
           ),
           TextButton(
             child: Text("Submit"),
-            onPressed: () {},
+            onPressed: () => {
+              Navigator.of(context).pop(groupName.text.toString()),
+              if (groupName.text.isNotEmpty && department.text.isNotEmpty)
+                {print(groupName.text), print(department.text)}
+            },
             // color: Colors.lightBlue,
             // textColor: Colors.white,
           )

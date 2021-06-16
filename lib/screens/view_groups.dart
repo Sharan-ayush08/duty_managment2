@@ -71,7 +71,7 @@ class ViewGroupsPage extends StatelessWidget {
     );
   }
 
-  _createNewGroup(BuildContext context) {
+  Future _createNewGroup(BuildContext context) {
     return showDialog(
       context: context,
       builder: (context) {
