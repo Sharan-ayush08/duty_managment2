@@ -1,3 +1,6 @@
+// ignore: unused_import
+import 'package:duty_managment2/providers/group_members.dart';
+import 'package:duty_managment2/providers/my_groups.dart';
 import 'package:flutter/material.dart';
 
 class PopupDialog extends StatefulWidget {
@@ -10,6 +13,8 @@ class PopupDialog extends StatefulWidget {
 class _PopupDialogState extends State<PopupDialog> {
   TextEditingController groupName = TextEditingController();
   TextEditingController department = TextEditingController();
+
+  var groupItems;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -72,11 +77,17 @@ class _PopupDialogState extends State<PopupDialog> {
           ),
           TextButton(
             child: Text("Submit"),
-            onPressed: () => {
-              Navigator.of(context).pop(groupName.text.toString()),
-              if (groupName.text.isNotEmpty && department.text.isNotEmpty)
-                {print(groupName.text), print(department.text)}
+            onPressed: () {
+              // ignore: unused_element
+              setState() {
+                groupItems.add(groupName.text.toString());
+              }
+
+              // if (groupName.text.isNotEmpty && department.text.isNotEmpty)
+              //   {print(groupName.text), print(department.text)}
+              Navigator.of(context).pop(groupName.text.toString());
             },
+
             // color: Colors.lightBlue,
             // textColor: Colors.white,
           )

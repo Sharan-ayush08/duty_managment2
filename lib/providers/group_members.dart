@@ -22,4 +22,6 @@ class Members with ChangeNotifier {
     members.add(value);
     notifyListeners();
   }
+
+  static void add(String string) {}
 }
