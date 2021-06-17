@@ -1,9 +1,11 @@
-import 'package:duty_managment2/screens/view_group_details.dart';
+import 'package:duty_managment2/providers/my_groups.dart';
+
 import 'package:duty_managment2/screens/view_groups.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MaterialApp(home: MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,6 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewGroupsPage();
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => Groups(),
+        )
+      ],
+      child: MaterialApp(
+        home: ViewGroupsPage(),
+      ),
+    );
   }
 }

@@ -1,22 +1,17 @@
-// ignore: unused_import
-import 'package:duty_managment2/providers/group_members.dart';
+import 'package:duty_managment2/models/group.dart';
 import 'package:duty_managment2/providers/my_groups.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class PopupDialog extends StatefulWidget {
-  const PopupDialog({Key? key}) : super(key: key);
-
-  @override
-  _PopupDialogState createState() => _PopupDialogState();
-}
-
-class _PopupDialogState extends State<PopupDialog> {
+// ignore: must_be_immutable
+class PopupDialog extends StatelessWidget {
   TextEditingController groupName = TextEditingController();
   TextEditingController department = TextEditingController();
-
   var groupItems;
+
   @override
   Widget build(BuildContext context) {
+    var groupList = Provider.of<Groups>(context);
     return Container(
       child: Column(
         children: <Widget>[
@@ -78,14 +73,12 @@ class _PopupDialogState extends State<PopupDialog> {
           TextButton(
             child: Text("Submit"),
             onPressed: () {
-              // ignore: unused_element
-              setState() {
-                groupItems.add(groupName.text.toString());
-              }
-
-              // if (groupName.text.isNotEmpty && department.text.isNotEmpty)
-              //   {print(groupName.text), print(department.text)}
-              Navigator.of(context).pop(groupName.text.toString());
+              Group newGroup = Group(
+                  groupName: groupName.text.toString(),
+                  departmentName: department.text.toString(),
+                  hospitalName: '');
+              groupList.addGroup(newGroup);
+              Navigator.pop(context);
             },
 
             // color: Colors.lightBlue,
@@ -96,4 +89,3 @@ class _PopupDialogState extends State<PopupDialog> {
     );
   }
 }
-// TODO Implement this library.

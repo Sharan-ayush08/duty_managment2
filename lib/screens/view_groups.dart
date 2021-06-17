@@ -1,16 +1,52 @@
 import 'package:flutter/material.dart';
-
 import '../providers/my_groups.dart';
-import '../models/group.dart';
 import '../screens/popup_dialogs/dialog.dart';
+import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class ViewGroupsPage extends StatelessWidget {
   static const routeName = '/view_groups';
-  const ViewGroupsPage({Key? key}) : super(key: key);
+  TextEditingController groupName = TextEditingController();
+  TextEditingController department = TextEditingController();
+  var groupItems;
 
   @override
   Widget build(BuildContext context) {
-    List<Group> myGroups = Groups.groupItems;
+    var groupList = Provider.of<Groups>(context);
+    Future _createNewGroup(BuildContext context) {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            elevation: 16,
+            child: Container(
+              child: ListView(
+                shrinkWrap: true,
+                children: <Widget>[
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        "GROUP DETAILS",
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.blueGrey[800],
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  PopupDialog(),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -23,13 +59,13 @@ class ViewGroupsPage extends StatelessWidget {
         },
         label: Text("Create Group"),
       ),
-      body: myGroups.isEmpty
+      body: groupList.items.isEmpty
           ? Center(
               child: Text('No Groups'),
             )
           : ListView.builder(
               scrollDirection: Axis.vertical,
-              itemCount: myGroups.length,
+              itemCount: groupList.items.length,
               itemBuilder: (BuildContext ctx, int index) {
                 return Card(
                   margin: EdgeInsets.fromLTRB(12, 12, 12, 0),
@@ -41,9 +77,9 @@ class ViewGroupsPage extends StatelessWidget {
                     child: Column(
                       children: <ListTile>[
                         ListTile(
-                          title: Text(myGroups[index].groupName),
-                          subtitle: Text(
-                              'Department:' + myGroups[index].departmentName),
+                          title: Text(groupList.items[index].groupName),
+                          subtitle: Text('Department:' +
+                              groupList.items[index].departmentName),
                           trailing: PopupMenuButton(
                             offset: Offset(0, -35),
                             itemBuilder: (context) => [
@@ -68,40 +104,6 @@ class ViewGroupsPage extends StatelessWidget {
                   ),
                 );
               }),
-    );
-  }
-
-  Future _createNewGroup(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          elevation: 16,
-          child: Container(
-            child: ListView(
-              shrinkWrap: true,
-              children: <Widget>[
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Text(
-                      "GROUP DETAILS",
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.blueGrey[800],
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                PopupDialog(),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }
