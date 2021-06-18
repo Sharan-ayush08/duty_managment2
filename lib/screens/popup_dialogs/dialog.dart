@@ -3,89 +3,90 @@ import 'package:duty_managment2/providers/my_groups.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-// ignore: must_be_immutable
 class PopupDialog extends StatelessWidget {
-  TextEditingController groupName = TextEditingController();
-  TextEditingController department = TextEditingController();
-  var groupItems;
+  final _nameController = TextEditingController();
+  final _departmentController = TextEditingController();
+
+  void _saveGroup(context) {
+    Group newGroup = Group(
+        groupName: _nameController.text,
+        departmentName: _departmentController.text,
+        hospitalName: '');
+    Provider.of<Groups>(context, listen: false).addGroup(newGroup);
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
-    var groupList = Provider.of<Groups>(context);
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: Divider(
-              height: 2,
-              thickness: 2,
-              color: Colors.blue,
+    return ListView(
+      shrinkWrap: true,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(top: 5),
+          child: Divider(
+            height: 2,
+            thickness: 2,
+            color: Colors.blue,
+          ),
+        ),
+        ListTile(
+          leading: Container(
+            height: double.infinity,
+            child: Icon(
+              Icons.group,
+              color: Colors.black,
             ),
           ),
-          ListTile(
-            leading: Container(
-              height: double.infinity,
-              child: Icon(
-                Icons.group,
-                color: Colors.black,
-              ),
-            ),
-            title: TextFormField(
-              controller: groupName,
-              decoration: InputDecoration(
-                labelText: "Group Name",
-              ),
+          title: TextFormField(
+            controller: _nameController,
+            decoration: InputDecoration(
+              labelText: "Group Name",
             ),
           ),
-          ListTile(
-            leading: Container(
-              height: double.infinity,
-              child: Icon(
-                Icons.local_hospital,
-                color: Colors.black,
-              ),
-            ),
-            title: TextFormField(
-              decoration: InputDecoration(
-                labelText: "Hospital Name",
-              ),
+        ),
+        ListTile(
+          leading: Container(
+            height: double.infinity,
+            child: Icon(
+              Icons.local_hospital,
+              color: Colors.black,
             ),
           ),
-          ListTile(
-            leading: Container(
-              height: double.infinity,
-              child: Icon(
-                Icons.share,
-                color: Colors.black,
-              ),
-            ),
-            title: TextFormField(
-              controller: department,
-              decoration: InputDecoration(
-                labelText: "Department",
-              ),
+          title: TextFormField(
+            decoration: InputDecoration(
+              labelText: "Hospital Name",
             ),
           ),
-          SizedBox(
-            height: 20,
+        ),
+        ListTile(
+          leading: Container(
+            height: double.infinity,
+            child: Icon(
+              Icons.share,
+              color: Colors.black,
+            ),
           ),
-          TextButton(
-            child: Text("Submit"),
-            onPressed: () {
-              Group newGroup = Group(
-                  groupName: groupName.text.toString(),
-                  departmentName: department.text.toString(),
-                  hospitalName: '');
-              groupList.addGroup(newGroup);
-              Navigator.pop(context);
-            },
+          title: TextFormField(
+            controller: _departmentController,
+            decoration: InputDecoration(
+              labelText: "Department",
+            ),
+          ),
+        ),
+        Container(
+          alignment: Alignment.bottomRight,
+          padding: EdgeInsets.all(12),
+          child: ElevatedButton(
+            child: Text(
+              "Save",
+            ),
+            onPressed: () => _saveGroup(context),
 
             // color: Colors.lightBlue,
             // textColor: Colors.white,
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }
