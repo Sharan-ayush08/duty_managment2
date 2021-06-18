@@ -6,10 +6,6 @@ import 'package:provider/provider.dart';
 // ignore: must_be_immutable
 class ViewGroupsPage extends StatelessWidget {
   static const routeName = '/view_groups';
-  TextEditingController groupName = TextEditingController();
-  TextEditingController department = TextEditingController();
-  var groupItems;
-
   @override
   Widget build(BuildContext context) {
     var groupList = Provider.of<Groups>(context);
