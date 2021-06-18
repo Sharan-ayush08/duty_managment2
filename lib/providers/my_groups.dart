@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/group.dart';
 
 class Groups with ChangeNotifier {
-  static List<Group> groupItems = [
+  static List<Group> _groupItems = [
     Group(
       groupName: 'Oncology Nurses',
       departmentName: 'Oncology',
@@ -16,11 +16,11 @@ class Groups with ChangeNotifier {
     ),
   ];
   List<Group> get items {
-    return [...groupItems];
+    return [..._groupItems];
   }
 
   void addGroup(value) {
-    groupItems.add(value);
+    _groupItems.add(value);
     notifyListeners();
   }
 }
