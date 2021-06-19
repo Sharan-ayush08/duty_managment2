@@ -66,7 +66,8 @@ class ViewGroupsPage extends StatelessWidget {
                 return Card(
                   margin: EdgeInsets.fromLTRB(12, 12, 12, 0),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   elevation: 8,
                   child: InkWell(
                     onTap: () {},
@@ -92,7 +93,21 @@ class ViewGroupsPage extends StatelessWidget {
                                 ),
                               ),
                             ],
-                            onSelected: (value) {},
+                            onSelected: (String value) {
+                              if (value == 'edit') {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PopupDialog()),
+                                );
+                              } else if (value == 'Delete') {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PopupDialog()),
+                                );
+                              }
+                            },
                           ),
                         )
                       ],
